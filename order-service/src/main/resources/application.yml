@@ -1,0 +1,58 @@
+server:
+  port: 9001
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+  instance:
+    #主机名称
+    hostname: ${spring.cloud.client.ip-address}
+    lease-expiration-duration-in-seconds: 90
+    lease-renewal-interval-in-seconds: 30
+    preferIpAddress: true
+    instance_id: ${spring.cloud.client.ip-address}:${server.port}
+
+spring:
+  application:
+    name: order-service
+
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true
+
+hystrix:
+  default:
+    #并发执行的最大线程数，默认10
+    coreSize: 200
+    #BlockingQueue的最大队列数，默认值-1
+    maxQueueSize: 1000
+    #即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝，默认值5
+    queueSizeRejectionThreshold: 800
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000
+ribbon:
+  eureka:
+    enabled: true
+  # 请求处理的超时时间，下级服务响应最大时间，如果超出设置的时间，消费方（路由也是消费方）返回timeout
+  ReadTimeout: 5000 # default 5000
+  # 请求连接的超时时间，限制2秒内必须请求到服务，并不限制服务处理的返回时间
+  ConnectTimeout: 2000 # default 2000
+  #单个后端微服务实例能接收的最大请求并发数
+  MaxConnectionPerHost: 500
+  # Ribbon允许最大连接数，即所有后端微服务实例请求并发数之和的最大值。
+  MaxTotalConnections: 1000
+  #ribbon的最大工作线程数
+  PoolMaxThreads: 1000
+  # 对当前实例的重试次数，默认0
+  #MaxAutoRetries: 0
+  # 对切换实例的重试次数，默认1
+  #MaxAutoRetriesNextServer: 1

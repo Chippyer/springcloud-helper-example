@@ -1,0 +1,88 @@
+# 端口号
+server:
+  port: 9527
+
+# 应用名称
+spring:
+  application:
+    name: zuul-service
+
+zuul:
+  # hystrix信号量semaphore的设置，默认为100，决定了hystrix并发请求数
+  # zuul.semaphore.max-semaphores的值不能小于server.tomcat.max-threads,否则会造成服务熔断
+  semaphore:
+    max-semaphores: 2000 #信号量
+  prefix: /api
+  # 路由方式是url，则使用下面的超时设置 （现在路由方式是Service Id，所以 以下配置不起作用，可删掉）
+  host:
+    # zuul内部路由可以理解为使用一个线程池去发送路由请求，所以我们也需要扩大这个线程池的容量
+    max-per-route-connections: 1000
+    max-total-connections: 1000
+    connect-timeout-millis: 100000  # default 2000
+    socket-timeout-millis: 100000   # default 10000
+  #  Names of HTTP headers to ignore completely (i.e. leave them out of downstream
+  #	 requests and drop them from downstream responses).
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
+
+# 使用Feign时 启用Hystrix
+feign:
+  hystrix:
+    enabled: true
+
+# 熔断超时和ribbon超时，哪个值小哪个生效
+# 如果配置了熔断fallback的话，熔断超时也要配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 15000 # default 1000
+
+# 路由方式是serviceId，则ribbon的超时设置生效
+ribbon:
+  eureka:
+    enabled: true
+  # 请求处理的超时时间，下级服务响应最大时间，如果超出设置的时间，消费方（路由也是消费方）返回timeout
+  ReadTimeout: 5000 # default 5000
+  # 请求连接的超时时间，限制2秒内必须请求到服务，并不限制服务处理的返回时间
+  ConnectTimeout: 2000 # default 2000
+  #单个后端微服务实例能接收的最大请求并发数
+  MaxConnectionPerHost: 500
+  # Ribbon允许最大连接数，即所有后端微服务实例请求并发数之和的最大值。
+  MaxTotalConnections: 1000
+  #ribbon的最大工作线程数
+  PoolMaxThreads: 1000
+  # 对当前实例的重试次数，默认0
+  #MaxAutoRetries: 0
+  # 对切换实例的重试次数，默认1
+  #MaxAutoRetriesNextServer: 1
+
+eureka:
+  server:
+    peer-node-read-timeout-ms: 5000 #默认200
+    # 配置是否开启Eureka自我保护模式（测试使用）
+    enable-self-preservation: true
+    # 扫描失效服务的间隔时间（单位毫秒，默认是60*1000）即60秒
+    eviction-interval-timer-in-ms: 4000
+    # 自我保护系数 默认 0.85
+    renewal-percent-threshold: 0.49
+  instance:
+    #主机名称
+    hostname: ${spring.cloud.client.ip-address}
+    #使用IP注册，而不是主机名称  unavailable-replicas
+    prefer-ip-address: true
+    #instance id显示
+    instance_id: ${spring.cloud.client.ip-address}:${server.port}
+    #心跳时间，默认30second
+    lease-renewal-interval-in-seconds: 30
+    #剔除服务时间，默认90second
+    lease-expiration-duration-in-seconds: 90
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
