@@ -1,11 +1,14 @@
 package com.chippy.example.feign;
 
 import com.chippy.common.response.Result;
+import com.chippy.example.feign.service.ServiceA;
 import com.chippy.feign.support.api.processor.FeignClientProcessor;
 import com.chippy.feign.support.definition.FeignClientDefinition;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +19,12 @@ import java.util.List;
  * @datetime 2020-12-15 11:25
  */
 @Slf4j
+@Component
 public class CustomerProcessor implements FeignClientProcessor {
+
+    @Resource
+    private ServiceA serviceA;
+
     @Override
     public List<String> getIncludePathPattern() {
         return new ArrayList<String>() {{
@@ -27,6 +35,8 @@ public class CustomerProcessor implements FeignClientProcessor {
     @Override
     public Object[] processBefore(FeignClientDefinition.Element element, Object[] param) {
         log.debug("我是自定义处理器-before");
+        final String hello = serviceA.hello();
+        log.debug("hello -" + hello);
         return param;
     }
 
@@ -45,4 +55,5 @@ public class CustomerProcessor implements FeignClientProcessor {
     public void processException(FeignClientDefinition.Element element, Exception e) {
         throw e;
     }
+
 }

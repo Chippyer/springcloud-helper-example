@@ -1,5 +1,4 @@
 # springcloud-helper-example
-<h1>springcloud-helper-example的组件使用示例</h1>
 <h2>1. springcloud-feign-helper</h2>
 第一步
 在我们需要使用的服务中加入jar包引用例如
@@ -43,7 +42,7 @@ public class UserApplication {
 ```
 
 完成上述两步骤后即可使用[GenericFeignClient]或[ListFeignClient]类进行调用
-<strong>需要注意的是，您的response包装实体需要实现Result<T>接口，具体详见DefaultResultImpl类</strong>
+<strong>需要注意的是，你的response包装实体需要实现Result<T>接口，具体详见DefaultResultImpl类</strong>
 
 第三步
 恭喜你完成上述两步骤就已经可以进行基本的使用了。在此我们讲一下扩展功能。
@@ -62,6 +61,7 @@ import com.chippy.feign.support.api.processor.FeignClientProcessor;
 import com.chippy.feign.support.definition.FeignClientDefinition;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +73,7 @@ import java.util.List;
  * @datetime 2020-12-15 11:25
  */
 @Slf4j
+@Component
 public class CustomerProcessor implements FeignClientProcessor {
     @Override
     public List<String> getIncludePathPattern() {
@@ -104,15 +105,7 @@ public class CustomerProcessor implements FeignClientProcessor {
     }
 }
 ```
-
-第二步 
-在resource/META-INF/services/下创建文件(不用指定文件类型)名为
-com.chippy.feign.support.api.processor.FeignClientProcessor
-文件内容为实现类，多个以换行处理
-com.chippy.example.feign.CustomerProcessor
-
 恭喜你到这里你已经完成了自定义的处理器的工作啦。
-
 
 
 
