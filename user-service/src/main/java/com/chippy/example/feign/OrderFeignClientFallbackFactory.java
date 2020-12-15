@@ -5,6 +5,7 @@ import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -20,6 +21,13 @@ public class OrderFeignClientFallbackFactory implements FallbackFactory<OrderFei
     @Override
     public OrderFeignClient create(Throwable cause) {
         return new OrderFeignClient() {
+            @Override
+            public ResponseResult<BigDecimal> byOrderNo(String orderNo) {
+                log.error(
+                    "OrderFeignClientFallback-byOrderNo-params[" + orderNo + "] fallback-cause-" + cause.getMessage());
+                return null;
+            }
+
             @Override
             public ResponseResult<OrderInfoResult> getOrderInfo(String orderNo) {
                 log.error("OrderFeignClientFallback-getOrderInfo-params[" + orderNo + "] fallback-cause-" + cause

@@ -38,7 +38,8 @@ public class OrderController {
         orderInfoResult2.setAddress(UUIDUtil.generateUuid() + "-北京");
         orderInfoResult2.setOrderNo(UUIDUtil.generateUuid() + "-订单号");
         orderInfoResult2.setUserId(UUIDUtil.generateUuid() + "-userId");
-        return ResponseResult.success(Arrays.asList(orderInfoResult1, orderInfoResult2));
+        //return ResponseResult.success(Arrays.asList(orderInfoResult1, orderInfoResult2));
+        return ResponseResult.fail(1, "自定义订单错误");
     }
 
 }

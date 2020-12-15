@@ -1,6 +1,8 @@
-package com.chippy.example.feign;
+package com.chippy.example.feign.processor;
 
 import com.chippy.common.response.Result;
+import com.chippy.common.utils.ObjectsUtil;
+import com.chippy.example.feign.OrderInfoResult;
 import com.chippy.example.feign.service.ServiceA;
 import com.chippy.feign.support.api.processor.FeignClientProcessor;
 import com.chippy.feign.support.definition.FeignClientDefinition;
@@ -45,8 +47,10 @@ public class CustomerProcessor implements FeignClientProcessor {
         log.debug("我是自定义处理器-after");
         final Result<OrderInfoResult> result = (Result<OrderInfoResult>)response;
         final OrderInfoResult data = result.getData();
-        data.setName("补充用户名");
-        result.setData(data);
+        if (ObjectsUtil.isNotEmpty(data)) {
+            data.setName("补充用户名");
+            result.setData(data);
+        }
         return result;
     }
 

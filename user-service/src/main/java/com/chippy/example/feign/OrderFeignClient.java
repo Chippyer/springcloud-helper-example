@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -15,6 +16,9 @@ import java.util.List;
  */
 @FeignClient(name = "ORDER-SERVICE", fallbackFactory = OrderFeignClientFallbackFactory.class)
 public interface OrderFeignClient {
+
+    @GetMapping("/price/byOrderNo")
+    ResponseResult<BigDecimal> byOrderNo(@RequestParam("orderNo") String orderNo);
 
     @GetMapping("/order/getOrderInfo")
     ResponseResult<OrderInfoResult> getOrderInfo(@RequestParam("orderNo") String orderNo);

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -39,7 +40,19 @@ public class FeignClientController {
      */
     @GetMapping("/2")
     public ResponseResult<List<OrderInfoResult>> getHistoryOrderInfoList(@RequestParam("userId") String userId) {
-        return ResponseResult.success(ListFeignClient.invoke(OrderInfoResult.class, "getHistoryOrderInfoList", userId));
+        return ResponseResult
+            .success(ListFeignClient.invokeIfExThrow(OrderInfoResult.class, "getHistoryOrderInfoList", userId));
+    }
+
+    /**
+     * 测试访问/price/*查看是否执行处理器
+     *
+     * @return java.math.BigDecimal
+     * @author chippy
+     */
+    @GetMapping("/3")
+    public ResponseResult<BigDecimal> byOrderNo(@RequestParam("orderNo") String orderNo) {
+        return ResponseResult.success(GenericFeignClient.invoke(BigDecimal.class, "byOrderNo", orderNo));
     }
 
 }

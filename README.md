@@ -106,6 +106,7 @@ public class CustomerProcessor implements FeignClientProcessor {
 }
 ```
 恭喜你到这里你已经完成了自定义的处理器的工作啦。
+小TIP: 内置抽象处理器可以继承便于通用空能的重复实现
 
 
 
