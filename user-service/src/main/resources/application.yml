@@ -22,9 +22,7 @@ spring:
   application:
     name: user-service
   redis:
-    cluster:
-      nodes: 10.248.245.170:6379,10.248.245.171:6379,10.248.245.172:6379
-    password: ENC(FUCWMOc2+lzrqY35AeGZLK2NcwWVVMpId2RCYgMmQtQ=)
+    redisson-file: redisson-single.yml
     jedis:
       pool:
         max-active: 20
