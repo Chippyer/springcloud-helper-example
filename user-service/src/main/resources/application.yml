@@ -1,6 +1,11 @@
 server:
   port: 9002
 
+# 加密所需的salt(盐)
+jasypt:
+  encryptor:
+    password: Jl6Hzhy6Lsh6Mhl
+
 eureka:
   client:
     serviceUrl:
@@ -16,6 +21,17 @@ eureka:
 spring:
   application:
     name: user-service
+  redis:
+    cluster:
+      nodes: 10.248.245.170:6379,10.248.245.171:6379,10.248.245.172:6379
+    password: ENC(FUCWMOc2+lzrqY35AeGZLK2NcwWVVMpId2RCYgMmQtQ=)
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        min-idle: 2
+        max-wait: -1ms
+    timeout: 5000ms
 
 feign:
   httpclient:
