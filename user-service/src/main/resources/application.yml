@@ -30,6 +30,8 @@ spring:
         min-idle: 2
         max-wait: -1ms
     timeout: 5000ms
+  scheduled:
+    assign-server: 10.177.16.85
 
 feign:
   httpclient:
