@@ -24,9 +24,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/springcloud_exmaple?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=true&useSSL=true
-    username: oak_test
-    password: pLs!ZtgG*HF6
+    url: jdbc:mysql://localhost:3306/springcloud_exmaple?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=true&useSSL=false
+    username: root
+    password: root
     druid:
       # 连接池的配置信息
       # 初始化大小，最小，最大
@@ -132,4 +132,4 @@ elastic-job:
     max-retries: 3
     max-sleep-time-ms: 3000
     session-timeout-ms: 5000
-  fail-retry-server-ip: 10.177.16.85
+  fail-retry-server-ip: 192.168.0.112
