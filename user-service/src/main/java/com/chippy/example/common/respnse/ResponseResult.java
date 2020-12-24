@@ -1,6 +1,6 @@
 package com.chippy.example.common.respnse;
 
-import com.chippy.common.response.Result;
+import com.chippy.core.common.response.Result;
 
 import java.io.Serializable;
 

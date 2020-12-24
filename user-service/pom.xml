@@ -38,6 +38,21 @@
             <artifactId>springcloud-redis-helper</artifactId>
             <version>2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.chippy</groupId>
+            <artifactId>springcloud-elasticjob-helper</artifactId>
+            <version>2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>5.1.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -58,6 +73,61 @@
             <artifactId>hutool-http</artifactId>
             <version>5.0.3</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+        <!-- mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.0.1</version>
+        </dependency>
     </dependencies>
+
+    <build>
+        <finalName>user-service-${project.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration><!-- 指定该Main Class为全局的唯一入口 -->
+                    <mainClass>com.chippy.example.UserApplication</mainClass>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                            <goal>build-info</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!-- 激活yml中的引用 -->
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>application*.yml</include>
+                    <include>bootstrap*.yml</include>
+                    <include>redisson*.yml</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 
 </project>

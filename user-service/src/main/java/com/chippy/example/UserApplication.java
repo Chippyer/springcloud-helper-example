@@ -1,5 +1,6 @@
 package com.chippy.example;
 
+import com.chippy.elasticjob.annotation.EnableElasticJob;
 import com.chippy.feign.annotation.EnableFeignClientHelper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableFeignClients
 @EnableFeignClientHelper
 @EnableScheduling
+@EnableElasticJob
 public class UserApplication {
 
     public static void main(String[] args) {
