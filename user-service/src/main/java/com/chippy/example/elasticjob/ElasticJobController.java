@@ -1,14 +1,16 @@
 package com.chippy.example.elasticjob;
 
-import cn.hutool.core.date.DateTime;
-import com.chippy.core.common.utils.DateUtil;
+import com.chippy.elasticjob.support.api.TraceJobOperationService;
 import com.chippy.elasticjob.support.domain.JobInfo;
+import com.chippy.elasticjob.support.enums.JobStatusEnum;
 import com.chippy.example.common.respnse.ResponseResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author: chippy
@@ -21,19 +23,19 @@ public class ElasticJobController {
     @Resource
     private MyHandler myHandler;
 
+    @Resource
+    private TraceJobOperationService traceJobOperationService;
+
     @PostMapping("/createJob")
     public ResponseResult<String> createJob(String originalJobName, String jobParameter, String invokeDateTime) {
-        final JobInfo jobInfo = JobInfo.buildSimpleJobInfo(originalJobName, jobParameter,
-            new DateTime(invokeDateTime, DateUtil.YYYY_MM_DD_HH_MM_SS));
-        myHandler.createJob(jobInfo);
+        myHandler.createJob(originalJobName, jobParameter, invokeDateTime);
         return ResponseResult.success("createJob: " + originalJobName);
     }
 
     @PostMapping("/updateJob")
     public ResponseResult<String> updateJob(String originalJobName, String jobParameter, String invokeDateTime) {
-        final JobInfo jobInfo = JobInfo.buildSimpleJobInfo(originalJobName, jobParameter,
-            new DateTime(invokeDateTime, DateUtil.YYYY_MM_DD_HH_MM_SS));
-        myHandler.updateJob(jobInfo);
+        // final JobInfo jobInfo = JobInfo.buildSimpleJobInfo(originalJobName, jobParameter, invokeDateTime);
+        myHandler.updateJob(originalJobName, jobParameter, invokeDateTime);
         return ResponseResult.success("updateJob: " + originalJobName);
     }
 
@@ -41,6 +43,12 @@ public class ElasticJobController {
     public ResponseResult<String> removeJob(String originalJobName) {
         myHandler.removeJob(originalJobName);
         return ResponseResult.success("removeJob: " + originalJobName);
+    }
+
+    @GetMapping("/byCondition")
+    public ResponseResult<List<JobInfo>> list(String originalJobName, String status) {
+        return ResponseResult
+            .success(traceJobOperationService.byOriginalJobName(originalJobName, JobStatusEnum.valueOf(status)));
     }
 
 }
