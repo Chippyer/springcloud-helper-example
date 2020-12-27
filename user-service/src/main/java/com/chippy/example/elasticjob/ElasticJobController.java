@@ -34,7 +34,6 @@ public class ElasticJobController {
 
     @PostMapping("/updateJob")
     public ResponseResult<String> updateJob(String originalJobName, String jobParameter, String invokeDateTime) {
-        // final JobInfo jobInfo = JobInfo.buildSimpleJobInfo(originalJobName, jobParameter, invokeDateTime);
         myHandler.updateJob(originalJobName, jobParameter, invokeDateTime);
         return ResponseResult.success("updateJob: " + originalJobName);
     }

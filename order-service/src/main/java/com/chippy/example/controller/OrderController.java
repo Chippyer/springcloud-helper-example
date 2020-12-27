@@ -1,13 +1,12 @@
 package com.chippy.example.controller;
 
-import com.chippy.common.utils.UUIDUtil;
+import com.chippy.core.common.utils.UUIDUtil;
 import com.chippy.example.common.response.ResponseResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

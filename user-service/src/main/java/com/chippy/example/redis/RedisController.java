@@ -1,14 +1,15 @@
 package com.chippy.example.redis;
 
 import com.chippy.example.common.respnse.ResponseResult;
+import com.chippy.redis.support.api.BooleanRedisTemplate;
+import com.chippy.redis.support.api.IntegerRedisTemplate;
+import com.chippy.redis.support.api.LongRedisTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.util.Map;
 
 /**
  * Redis相关接口API
@@ -22,13 +23,45 @@ import java.util.Map;
 public class RedisController {
 
     @Resource
-    private RedisTemplate<String, String> redisTemplate;
+    private LongRedisTemplate longRedisTemplate;
 
-    @GetMapping("/set")
-    public ResponseResult set(String k1, String k2, String v1) {
-        redisTemplate.opsForHash().put(k1, k2, v1);
-        final Map<Object, Object> entries = redisTemplate.opsForHash().entries(k1);
-        return ResponseResult.success(entries);
+    @Resource
+    private IntegerRedisTemplate integerRedisTemplate;
+
+    @Resource
+    private BooleanRedisTemplate booleanRedisTemplate;
+
+    @GetMapping("/longSet")
+    public ResponseResult<Long> longSet(String k1, Long v1) {
+        longRedisTemplate.opsForValue().set(k1, v1);
+        final Long longValue = longRedisTemplate.opsForValue().get(k1);
+        return ResponseResult.success(longValue);
+    }
+
+    @GetMapping("/integerSet")
+    public ResponseResult<Integer> integerSet(String k1, Integer v1) {
+        integerRedisTemplate.opsForValue().set(k1, v1);
+        final Integer integerValue = integerRedisTemplate.opsForValue().get(k1);
+        return ResponseResult.success(integerValue);
+    }
+
+    @GetMapping("/booleanSet")
+    public ResponseResult<Boolean> booleanSet(String k1, Boolean v1) {
+        booleanRedisTemplate.opsForValue().set(k1, v1);
+        final Boolean booleanValue = booleanRedisTemplate.opsForValue().get(k1);
+        return ResponseResult.success(booleanValue);
+    }
+
+    @GetMapping("/longIncrease")
+    public ResponseResult<Long> longIncrease(String k1) {
+        final Long increment = longRedisTemplate.opsForValue().increment(k1, 1);
+        return ResponseResult.success(increment);
+    }
+
+    @GetMapping("/integerIncrease")
+    public ResponseResult<Integer> integerIncrease(String k1) {
+        final Long increment = integerRedisTemplate.opsForValue().increment(k1, 1);
+        return ResponseResult.success(Integer.parseInt(String.valueOf(increment)));
     }
 
 }
