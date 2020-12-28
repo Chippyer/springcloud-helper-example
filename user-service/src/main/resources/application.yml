@@ -70,14 +70,7 @@ spring:
         login-password: 123456
   redis:
     redisson:
-      file: classpath:redisson-single.yml
-    jedis:
-      pool:
-        max-active: 20
-        max-idle: 10
-        min-idle: 2
-        max-wait: -1ms
-    timeout: 5000ms
+      config: classpath:redisson-single.yml
   scheduled:
     assign-server: 10.177.16.85
 
