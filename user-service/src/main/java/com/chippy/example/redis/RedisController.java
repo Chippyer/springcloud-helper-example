@@ -1,9 +1,9 @@
 package com.chippy.example.redis;
 
 import com.chippy.example.common.respnse.ResponseResult;
-import com.chippy.redis.support.api.BooleanRedisTemplate;
-import com.chippy.redis.support.api.IntegerRedisTemplate;
-import com.chippy.redis.support.api.LongRedisTemplate;
+import com.ejoy.redis.support.api.BooleanRedisTemplate;
+import com.ejoy.redis.support.api.IntegerRedisTemplate;
+import com.ejoy.redis.support.api.LongRedisTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,8 +1,5 @@
 package com.chippy.example.common.configuration;
 
-import com.chippy.redis.support.api.BooleanRedisTemplate;
-import com.chippy.redis.support.api.IntegerRedisTemplate;
-import com.chippy.redis.support.api.LongRedisTemplate;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,27 +45,6 @@ public class RedisConfiguration {
         template.setHashValueSerializer(jackson2JsonRedisSerializer);
         template.afterPropertiesSet();
         return template;
-    }
-
-    @Bean
-    public RedisTemplate<String, Long> longRedisTemplate(RedisConnectionFactory factory) {
-        final LongRedisTemplate longRedisTemplate = new LongRedisTemplate();
-        longRedisTemplate.setConnectionFactory(factory);
-        return longRedisTemplate;
-    }
-
-    @Bean
-    public RedisTemplate<String, Integer> integerRedisTemplate(RedisConnectionFactory factory) {
-        final IntegerRedisTemplate integerRedisTemplate = new IntegerRedisTemplate();
-        integerRedisTemplate.setConnectionFactory(factory);
-        return integerRedisTemplate;
-    }
-
-    @Bean
-    public RedisTemplate<String, Boolean> booleanRedisTemplate(RedisConnectionFactory factory) {
-        final BooleanRedisTemplate booleanRedisTemplate = new BooleanRedisTemplate();
-        booleanRedisTemplate.setConnectionFactory(factory);
-        return booleanRedisTemplate;
     }
 
 }

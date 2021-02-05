@@ -1,7 +1,7 @@
 package com.chippy.example.controller;
 
-import com.chippy.core.common.utils.UUIDUtil;
 import com.chippy.example.common.response.ResponseResult;
+import com.ejoy.core.common.utils.UUIDUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

@@ -1,6 +1,6 @@
 package com.chippy.example.feign.processor;
 
-import com.chippy.feign.support.api.processor.AbstractLogFeignClientProcessor;
+import com.ejoy.feign.support.api.processor.AbstractLogFeignClientProcessor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

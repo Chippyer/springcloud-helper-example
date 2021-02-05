@@ -1,7 +1,7 @@
 package com.chippy.example;
 
-import com.chippy.elasticjob.annotation.EnableElasticJob;
-import com.chippy.feign.annotation.EnableFeignClientHelper;
+import com.ejoy.elasticjob.annotation.EnableElasticJob;
+import com.ejoy.feign.annotation.EnableFeignClientHelper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;

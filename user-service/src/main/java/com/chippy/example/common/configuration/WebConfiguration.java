@@ -1,6 +1,6 @@
 package com.chippy.example.common.configuration;
 
-import com.chippy.core.common.filter.RequestLoggingFilter;
+import com.ejoy.core.common.filter.RequestLoggingFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
 package com.chippy.example.elasticjob;
 
-import com.chippy.elasticjob.support.api.AbstractTraceJob;
+import com.ejoy.elasticjob.support.api.AbstractTraceJob;
 import org.apache.shardingsphere.elasticjob.api.ShardingContext;
 import org.springframework.stereotype.Component;
 

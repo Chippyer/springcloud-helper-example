@@ -1,11 +1,11 @@
 package com.chippy.example.feign.processor;
 
-import com.chippy.core.common.response.Result;
-import com.chippy.core.common.utils.ObjectsUtil;
 import com.chippy.example.feign.OrderInfoResult;
 import com.chippy.example.feign.service.ServiceA;
-import com.chippy.feign.support.api.processor.FeignClientProcessor;
-import com.chippy.feign.support.definition.FeignClientDefinition;
+import com.ejoy.core.common.response.Result;
+import com.ejoy.core.common.utils.ObjectsUtil;
+import com.ejoy.feign.support.api.processor.FeignClientProcessor;
+import com.ejoy.feign.support.definition.FeignClientDefinition;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class CustomerProcessor implements FeignClientProcessor {
     @Override
     public List<String> getIncludePathPattern() {
         return new ArrayList<String>() {{
-            add("/order/getOrderInfo");
+            add("/order/**");
         }};
     }
 

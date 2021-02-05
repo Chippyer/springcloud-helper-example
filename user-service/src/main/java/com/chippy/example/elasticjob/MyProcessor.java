@@ -1,6 +1,6 @@
 package com.chippy.example.elasticjob;
 
-import com.chippy.elasticjob.support.api.TraceJobProcessor;
+import com.ejoy.elasticjob.support.api.TraceJobProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

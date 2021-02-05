@@ -1,9 +1,9 @@
 package com.chippy.example.elasticjob;
 
-import com.chippy.elasticjob.support.api.TraceJobOperationService;
-import com.chippy.elasticjob.support.domain.JobInfo;
-import com.chippy.elasticjob.support.enums.JobStatusEnum;
 import com.chippy.example.common.respnse.ResponseResult;
+import com.ejoy.elasticjob.support.api.TraceJobOperationService;
+import com.ejoy.elasticjob.support.domain.JobInfo;
+import com.ejoy.elasticjob.support.enums.JobStatusEnum;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
