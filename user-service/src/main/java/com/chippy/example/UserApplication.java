@@ -2,7 +2,7 @@ package com.chippy.example;
 
 import com.ejoy.elasticjob.annotation.EnableElasticJob;
 import com.ejoy.feign.annotation.EnableFeignClientHelper;
-import com.ejoy.tkmapper.EnableMonitorField;
+import com.ejoy.tkmapper.EnableMonitor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -22,7 +22,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableFeignClientHelper
 @EnableScheduling
 @EnableElasticJob
-@EnableMonitorField
+@EnableMonitor
 @MapperScan("com.chippy.example.mapper")
 public class UserApplication {
 

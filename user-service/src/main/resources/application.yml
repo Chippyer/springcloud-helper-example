@@ -24,9 +24,12 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/springcloud_exmaple?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=true&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password: root
+    url: jdbc:mysql://10.248.245.112:6003/oak_marketing_430?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=true
+    username: oak_test
+    password: pLs!ZtgG*HF6
+#    url: jdbc:mysql://localhost:3306/springcloud_exmaple?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=true&useSSL=false&serverTimezone=GMT%2B8
+#    username: root
+#    password: root
     druid:
       # 连接池的配置信息
       # 初始化大小，最小，最大
@@ -127,3 +130,6 @@ elastic-job:
     max-sleep-time-ms: 3000
     session-timeout-ms: 5000
   fail-retry-server-ip: 192.168.0.112
+
+monitor:
+  packages: com.chippy.example.entity
