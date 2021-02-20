@@ -1,10 +1,12 @@
 package com.chippy.example.service;
 
+import cn.hutool.json.JSONUtil;
 import com.chippy.example.entity.User;
 import com.chippy.example.mapper.UserMapper;
 import com.ejoy.core.common.utils.ObjectsUtil;
-import com.ejoy.tkmapper.MonitorService;
+import com.ejoy.tkmapper.support.api.IMonitorService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -19,9 +21,10 @@ public class UserService implements IUserService {
     private UserMapper userMapper;
 
     @Resource
-    private MonitorService monitorService;
+    private IMonitorService monitorService;
 
     @Override
+    @Transactional
     public Long updateStatus(Long id, Boolean status) {
         User user = userMapper.selectByPrimaryKey(id);
         if (ObjectsUtil.isEmpty(user)) {
@@ -33,7 +36,7 @@ public class UserService implements IUserService {
             user.setStatus(status);
             userMapper.updateByPrimaryKeySelective(user);
         }
-        monitorService.update(user);
+        monitorService.process(user, JSONUtil.toJsonStr(user));
         return user.getId();
     }
 }

@@ -1,14 +1,14 @@
 package com.chippy.example.entity;
 
 import com.chippy.example.mapper.UserMapper;
-import com.ejoy.tkmapper.Monitor;
-import com.ejoy.tkmapper.MonitorExecutor;
+import com.ejoy.tkmapper.annotation.Monitor;
+import com.ejoy.tkmapper.annotation.MonitorExecutor;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@MonitorExecutor(executor = UserMapper.class)
+@MonitorExecutor(UserMapper.class)
 @Data
 @Table(name = "tbl_test_user_info")
 public class User implements Serializable {
@@ -21,7 +21,7 @@ public class User implements Serializable {
     @Column(name = "`name`")
     private String name;
 
-    @Monitor
+    @Monitor(value = true)
     @Column(name = "status")
     private Boolean status;
 
