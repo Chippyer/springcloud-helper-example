@@ -32,9 +32,14 @@ public class UserController {
         return DefaultResultImpl.success("hello world");
     }
 
-    @GetMapping("/2")
-    public DefaultResultImpl<Long> test2(Long id, Boolean status) {
+    @GetMapping("/21")
+    public DefaultResultImpl<User> test21(Long id, Boolean status) {
         return DefaultResultImpl.success(userService.updateStatus(id, status));
+    }
+
+    @GetMapping("/22")
+    public DefaultResultImpl<User> test22(Long id, String name) {
+        return DefaultResultImpl.success(userService.updateName(id, name));
     }
 
     @Resource
