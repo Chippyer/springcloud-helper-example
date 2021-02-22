@@ -12,4 +12,6 @@ public interface IUserService {
 
     User updateName(Long id, String name);
 
+    User updateNameAndStatus(Long id, String name, Boolean status);
+
 }

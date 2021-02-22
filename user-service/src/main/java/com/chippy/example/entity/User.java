@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @MonitorExecutor(UserMapper.class)
+@Monitor
 @Data
 @Table(name = "tbl_test_user_info")
 public class User implements Serializable {
@@ -18,10 +19,11 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //    @Monitor
     @Column(name = "`name`")
     private String name;
 
-    @Monitor(value = true)
+    //    @Monitor(value = true)
     @Column(name = "status")
     private Boolean status;
 

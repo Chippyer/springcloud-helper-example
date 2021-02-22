@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
+import java.util.Map;
+
 /**
  * 用户状态字段监听事件监听
  *
@@ -21,7 +23,7 @@ public class UserStatusMonitorEventListener extends AbstractMonitorExecutorListe
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT, fallbackExecution = true)
     public void process(MonitorEvent monitorEvent) {
-        final MonitorOperationLogInfo sourceInfo = super.getSourceInfo(monitorEvent);
+        final Map<String, MonitorOperationLogInfo> sourceInfo = super.getSourceInfo(monitorEvent);
         log.debug("接受事件数据-" + JSONUtil.toJsonStr(sourceInfo));
     }
 

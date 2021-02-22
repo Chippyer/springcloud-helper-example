@@ -57,4 +57,20 @@ public class UserService implements IUserService {
         }
         return user;
     }
+
+    @Override
+    public User updateNameAndStatus(Long id, String name, Boolean status) {
+        User user = userMapper.selectByPrimaryKey(id);
+        if (ObjectsUtil.isEmpty(user)) {
+            user = new User();
+            user.setName(name);
+            user.setStatus(status);
+            userMapper.insertSelective(user);
+        } else {
+            user.setName(name);
+            user.setStatus(status);
+            userMapper.updateByPrimaryKeySelective(user);
+        }
+        return user;
+    }
 }

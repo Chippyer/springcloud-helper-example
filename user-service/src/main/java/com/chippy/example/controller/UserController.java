@@ -42,12 +42,17 @@ public class UserController {
         return DefaultResultImpl.success(userService.updateName(id, name));
     }
 
+    @GetMapping("/23")
+    public DefaultResultImpl<User> test23(Long id, String name, Boolean status) {
+        return DefaultResultImpl.success(userService.updateNameAndStatus(id, name, status));
+    }
+
     @Resource
     private IMonitorService monitorService;
 
     @GetMapping("/3")
-    public DefaultResultImpl<List<MonitorOperationLogInfo>> test3(Long id, int endIndex) {
-        return DefaultResultImpl.success(monitorService.get(User.class, String.valueOf(id), endIndex));
+    public DefaultResultImpl<List<MonitorOperationLogInfo>> test3(Long id, String field, int endIndex) {
+        return DefaultResultImpl.success(monitorService.get(User.class, String.valueOf(id), field, endIndex));
     }
 
 }
